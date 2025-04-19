@@ -8,13 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
 import { KafkaService } from '../../services/kafka.service';
 import { Message } from '../../models/message.model';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-kafka-dashboard',
@@ -29,9 +29,9 @@ import { Message } from '../../models/message.model';
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
-    MatTabsModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
   templateUrl: './kafka-dashboard.component.html',
   styleUrls: ['./kafka-dashboard.component.scss']

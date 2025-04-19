@@ -1,6 +1,6 @@
 // src/app/services/kafka.service.ts
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject, fromEvent, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Socket, io } from 'socket.io-client';
@@ -17,6 +17,15 @@ export class KafkaService {
   private socketConnectSubject = new Subject<void>();
   private socketDisconnectSubject = new Subject<void>();
   private readonly apiUrl = `${environment.apiUrl}/kafka`;
+  private baseUrl = 'http://localhost:3000/api'; // Replace with your backend API base URL
+
+  
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('authToken'); // Retrieve the token from localStorage
+    return new HttpHeaders({
+      Authorization: token ? `Bearer ${token}` : '', // Add the token to the Authorization header
+    });
+  }
 
   /**
    * Initialize and connect to the WebSocket server
@@ -132,7 +141,9 @@ export class KafkaService {
    * Get all available Kafka topics
    */
   getTopics(): Observable<{ topics: string[] }> {
-    return this.http.get<{ topics: string[] }>(`${this.apiUrl}/topics`)
+    return this.http.get<{ topics: string[] }>(`${this.apiUrl}/topics`,{
+      headers: this.getAuthHeaders(),
+    })
       .pipe(
         catchError(error => {
           console.error('Error getting topics:', error);
@@ -165,7 +176,9 @@ export class KafkaService {
       }
     }
     
-    return this.http.post(`${this.apiUrl}/produce`, payload);
+    return this.http.post(`${this.apiUrl}/produce`, payload,{
+      headers: this.getAuthHeaders(),
+    },);
   }
 
   /**
@@ -175,7 +188,9 @@ export class KafkaService {
     return this.http.post(`${this.apiUrl}/topics`, {
       topic,
       numPartitions,
-      replicationFactor
+      replicationFactor,
+    },{
+      headers: this.getAuthHeaders(),
     });
   }
 }

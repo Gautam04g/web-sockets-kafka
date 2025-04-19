@@ -7,7 +7,7 @@
       </div>
     </header>
   
-    <mat-tabs animationDuration="300ms">
+    <mat-tab-group animationDuration="300ms">
       <!-- Topics Tab -->
       <mat-tab label="Topics">
         <div class="tab-content">
@@ -84,7 +84,7 @@
                   </div>
                   
                   <div class="form-actions">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="topicForm.invalid || loading()">
+                    <button mat-button type="submit" [disabled]="topicForm.invalid || loading()">
                       Create Topic
                     </button>
                   </div>
@@ -218,5 +218,5 @@
           </div>
         </div>
       </mat-tab>
-    </mat-tabs>
+    </mat-tab-group>
   </div>

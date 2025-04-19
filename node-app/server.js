@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Routes
 app.use('/api/kafka', require('./routes/kafka.routes'));
-app.use('/api/users', require('./routes/user.routes'));
+// app.use('/api/users', require('./routes/user.routes'));
 // Add other routes as needed
 
 // Error handling middleware

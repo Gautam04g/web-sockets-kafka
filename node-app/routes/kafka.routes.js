@@ -3,7 +3,9 @@ const express = require('express');
 const router = express.Router();
 const kafkaController = require('../controllers/kafka.controller');
 const { isAuthenticated, hasPermission } = require('../middleware/auth.middleware');
+const authController = require('../controllers/auth.controller');
 
+router.post('/login', authController.login);
 /**
  * @route POST /api/kafka/produce
  * @desc Send a message to a Kafka topic
